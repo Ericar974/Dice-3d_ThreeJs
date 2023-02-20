@@ -57,11 +57,13 @@ const pickNumber = () => {
 }
 
 let start = false
-let loopingTime = 2400
+let loopingTime = 100
+let timeWhenClick = 0
+let count = 0
 canvas.addEventListener('click', () => {
 	start = true
 	const number = pickNumber()
-
+	
 	if(number == 1) {
 		texture_ft = new THREE.TextureLoader().load('img/1.png');
 		materialArray[4].map = texture_ft;
@@ -93,14 +95,16 @@ canvas.addEventListener('click', () => {
 const update = (time) => {
 	requestAnimationFrame(update)
 	if(start){
-		if(time < loopingTime){
-			cube.rotation.x = time/100;
-			cube.rotation.y = time/100;
-		}else{	
+		if(count == loopingTime){
 			cube.rotation.x = 0
 			cube.rotation.y = 0
 			start = false
-			loopingTime = time + 2400
+			timeWhenClick = 0
+			count = 0
+		}else if(timeWhenClick < loopingTime){
+			cube.rotation.x = time/100;
+			cube.rotation.y = time/100;
+			count++
 		}
 	}
 	// Render WebGL Scene
