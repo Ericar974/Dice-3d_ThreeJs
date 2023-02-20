@@ -31,9 +31,20 @@ const material = new THREE.MeshNormalMaterial();
 const cube = new THREE.Mesh( geometry, material );
 scene.add(cube);
 
+// randomize number
+const pickNumber = () => {
+	const diceValues = [1, 2, 3, 4, 5, 6];
 
+	const randomIndex = Math.floor(Math.random() * diceValues.length);
 
+	const randomValue = diceValues[randomIndex];
+	console.log(randomValue);
+	return randomValue
+}
 
+canvas.addEventListener('click', () => {
+	pickNumber()
+})
 
 // à chaque image : 60fps
 const update = (time) => {
