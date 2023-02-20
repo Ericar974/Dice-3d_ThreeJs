@@ -42,19 +42,25 @@ const pickNumber = () => {
 	return randomValue
 }
 
+let start = false
 canvas.addEventListener('click', () => {
+	start = true
 	pickNumber()
 })
+
 
 // à chaque image : 60fps
 const update = (time) => {
 	requestAnimationFrame(update)
+	if(start){
 
-	cube.rotation.x = time / 2000;
-	cube.rotation.y = time / 1000;
-
+		cube.rotation.x = time / 2000;
+		cube.rotation.y = time / 1000;
+	
+	}
 	// Render WebGL Scene
 	renderer.render(scene, camera);
+	
 }
 requestAnimationFrame(update)
 
