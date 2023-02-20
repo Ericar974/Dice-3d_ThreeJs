@@ -64,21 +64,27 @@ canvas.addEventListener('click', () => {
 
 	if(number == 1) {
 		texture_ft = new THREE.TextureLoader().load('img/1.png');
+		materialArray[4].map = texture_ft;
 	}
 	if(number == 2) {
 		texture_ft = new THREE.TextureLoader().load('img/2.png');
+		materialArray[4].map = texture_ft;
 	}
 	if(number == 3) {
 		texture_ft = new THREE.TextureLoader().load('img/3.png');
+		materialArray[4].map = texture_ft;
 	}
 	if(number == 4) {
 		texture_ft = new THREE.TextureLoader().load('img/4.png');
+		materialArray[4].map = texture_ft;
 	}
 	if(number == 5) {
 		texture_ft = new THREE.TextureLoader().load('img/5.png');
+		materialArray[4].map = texture_ft;
 	}
 	if(number == 6) {
 		texture_ft = new THREE.TextureLoader().load('img/6.png');
+		materialArray[4].map = texture_ft;
 	}
 })
 
