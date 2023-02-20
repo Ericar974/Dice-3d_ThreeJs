@@ -1,23 +1,49 @@
-import './style.css'
-import javascriptLogo from './javascript.svg'
-import { setupCounter } from './counter.js'
+import * as THREE from 'three';
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
+// Setup scene
+const canvas = document.getElementById('canvas');
+const scene = new THREE.Scene();
 
-setupCounter(document.querySelector('#counter'))
+const camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 10 );
+camera.position.z = 1;
+
+// renderer
+const renderer = new THREE.WebGLRenderer({
+	canvas: canvas,
+	antialias: true, 
+	alpha: true 
+});
+renderer.setSize(window.innerWidth, window.innerHeight)
+renderer.setPixelRatio(window.devicePixelRatio)
+renderer.setClearColor(0x000000, 1);
+
+window.addEventListener("resize", () => {
+	renderer.setSize(window.innerWidth, window.innerHeight)
+	renderer.setPixelRatio(window.devicePixelRatio)
+	camera.aspect = window.innerWidth / window.innerHeight
+	camera.updateProjectionMatrix()
+})
+
+// cube
+const geometry = new THREE.BoxGeometry( 0.2, 0.2, 0.2 );
+const material = new THREE.MeshNormalMaterial();
+
+const cube = new THREE.Mesh( geometry, material );
+scene.add(cube);
+
+
+
+
+
+// à chaque image : 60fps
+const update = (time) => {
+	requestAnimationFrame(update)
+
+	cube.rotation.x = time / 2000;
+	cube.rotation.y = time / 1000;
+
+	// Render WebGL Scene
+	renderer.render(scene, camera);
+}
+requestAnimationFrame(update)
+
