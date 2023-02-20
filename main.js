@@ -25,10 +25,24 @@ window.addEventListener("resize", () => {
 })
 
 // cube
-const geometry = new THREE.BoxGeometry( 0.2, 0.2, 0.2 );
-const material = new THREE.MeshNormalMaterial();
+let texture_ft = new THREE.TextureLoader().load('img/1.png');
+let texture_bk = new THREE.TextureLoader().load('img/2.png');
+let texture_up = new THREE.TextureLoader().load('img/3.png');
+let texture_dn = new THREE.TextureLoader().load('img/4.png');
+let texture_rt = new THREE.TextureLoader().load('img/5.png');
+let texture_lf = new THREE.TextureLoader().load('img/6.png');
 
-const cube = new THREE.Mesh( geometry, material );
+let materialArray = [
+	new THREE.MeshBasicMaterial({map: texture_rt}),
+	new THREE.MeshBasicMaterial({map: texture_lf}),
+	new THREE.MeshBasicMaterial({map: texture_up}),
+	new THREE.MeshBasicMaterial({map: texture_dn}),
+	new THREE.MeshBasicMaterial({map: texture_ft}),
+	new THREE.MeshBasicMaterial({map: texture_bk})
+];
+
+let geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
+var cube = new THREE.Mesh( geometry, materialArray );
 scene.add(cube);
 
 // randomize number
@@ -46,7 +60,26 @@ let start = false
 let loopingTime = 2400
 canvas.addEventListener('click', () => {
 	start = true
-	pickNumber()
+	const number = pickNumber()
+
+	if(number == 1) {
+		texture_ft = new THREE.TextureLoader().load('img/1.png');
+	}
+	if(number == 2) {
+		texture_ft = new THREE.TextureLoader().load('img/2.png');
+	}
+	if(number == 3) {
+		texture_ft = new THREE.TextureLoader().load('img/3.png');
+	}
+	if(number == 4) {
+		texture_ft = new THREE.TextureLoader().load('img/4.png');
+	}
+	if(number == 5) {
+		texture_ft = new THREE.TextureLoader().load('img/5.png');
+	}
+	if(number == 6) {
+		texture_ft = new THREE.TextureLoader().load('img/6.png');
+	}
 })
 
 
