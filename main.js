@@ -43,6 +43,7 @@ const pickNumber = () => {
 }
 
 let start = false
+let loopingTime = 2400
 canvas.addEventListener('click', () => {
 	start = true
 	pickNumber()
@@ -53,10 +54,15 @@ canvas.addEventListener('click', () => {
 const update = (time) => {
 	requestAnimationFrame(update)
 	if(start){
-
-		cube.rotation.x = time / 2000;
-		cube.rotation.y = time / 1000;
-	
+		if(time < loopingTime){
+			cube.rotation.x = time/100;
+			cube.rotation.y = time/100;
+		}else{	
+			cube.rotation.x = 0
+			cube.rotation.y = 0
+			start = false
+			loopingTime = time + 2400
+		}
 	}
 	// Render WebGL Scene
 	renderer.render(scene, camera);
