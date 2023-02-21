@@ -34,7 +34,7 @@ let texture_lf = new THREE.TextureLoader().load('img/6.png');
 
 // set color depending on house of player
 let color = 0x740001;
-let house = 'griffondor';
+let house = 'poufsouffle';
 
 switch (house) {
 	case 'griffondor':
@@ -44,7 +44,7 @@ switch (house) {
 		color = 0x1A472A;
 		break;
 	case 'poufsouffle':
-		color = 0xFFF4B1;
+		color = 0xFFED86;
 		break;
 	case 'serdaigle':
 		color = 0x0E1A40;
