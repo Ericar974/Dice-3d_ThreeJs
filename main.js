@@ -32,14 +32,64 @@ let texture_dn = new THREE.TextureLoader().load('img/4.png');
 let texture_rt = new THREE.TextureLoader().load('img/5.png');
 let texture_lf = new THREE.TextureLoader().load('img/6.png');
 
+// var material = new THREE.MeshBasicMaterial( {
+// 	color: 0x0080ff,
+// 	map: texture_ft
+// });
+
+// material.onBeforeCompile = function ( shader ) {
+// 	const custom_map_fragment = THREE.ShaderChunk.map_fragment.replace(
+// 		`diffuseColor *= sampledDiffuseColor;`,
+// 		`diffuseColor = vec4( mix( diffuse, sampledDiffuseColor.rgb, sampledDiffuseColor.a ), opacity );`
+// 	);
+
+// 	shader.fragmentShader = shader.fragmentShader.replace( '#include <map_fragment>', custom_map_fragment );
+// };
+
 let materialArray = [
-	new THREE.MeshBasicMaterial({map: texture_rt}),
-	new THREE.MeshBasicMaterial({map: texture_lf}),
-	new THREE.MeshBasicMaterial({map: texture_up}),
-	new THREE.MeshBasicMaterial({map: texture_dn}),
-	new THREE.MeshBasicMaterial({map: texture_ft}),
-	new THREE.MeshBasicMaterial({map: texture_bk})
+	new THREE.MeshBasicMaterial({
+		map: texture_rt, 
+		transparent: true,
+		color: 0x0080ff,
+	}),
+	new THREE.MeshBasicMaterial({
+		map: texture_lf, 
+		transparent: true,
+		color: 0x0080ff,
+	}),
+	new THREE.MeshBasicMaterial({
+		map: texture_up, 
+		transparent: true,
+		color: 0x0080ff,
+	}),
+	new THREE.MeshBasicMaterial({
+		map: texture_dn, 
+		transparent: true,
+		color: 0x0080ff,
+	}),
+	new THREE.MeshBasicMaterial({
+		map: texture_ft, 
+		transparent: true,
+		color: 0x0080ff,
+	}),
+	new THREE.MeshBasicMaterial({
+		map: texture_bk, 
+		transparent: true,
+		color: 0x0080ff,
+	})
 ];
+
+// apply shaders to all mesh
+for (let i = 0; i < materialArray.length; i++) {
+	materialArray[i].onBeforeCompile = function ( shader ) {
+		const custom_map_fragment = THREE.ShaderChunk.map_fragment.replace(
+			`diffuseColor *= sampledDiffuseColor;`,
+			`diffuseColor = vec4( mix( diffuse, sampledDiffuseColor.rgb, sampledDiffuseColor.a ), opacity );`
+		);
+	
+		shader.fragmentShader = shader.fragmentShader.replace( '#include <map_fragment>', custom_map_fragment );
+	};
+}
 
 let geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
 var cube = new THREE.Mesh( geometry, materialArray );
