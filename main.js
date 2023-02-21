@@ -32,50 +32,58 @@ let texture_dn = new THREE.TextureLoader().load('img/4.png');
 let texture_rt = new THREE.TextureLoader().load('img/5.png');
 let texture_lf = new THREE.TextureLoader().load('img/6.png');
 
-// var material = new THREE.MeshBasicMaterial( {
-// 	color: 0x0080ff,
-// 	map: texture_ft
-// });
+// set color depending on house of player
+let color = 0x740001;
+let house = 'griffondor';
 
-// material.onBeforeCompile = function ( shader ) {
-// 	const custom_map_fragment = THREE.ShaderChunk.map_fragment.replace(
-// 		`diffuseColor *= sampledDiffuseColor;`,
-// 		`diffuseColor = vec4( mix( diffuse, sampledDiffuseColor.rgb, sampledDiffuseColor.a ), opacity );`
-// 	);
-
-// 	shader.fragmentShader = shader.fragmentShader.replace( '#include <map_fragment>', custom_map_fragment );
-// };
+switch (house) {
+	case 'griffondor':
+		color = 0x740001;
+		break;
+	case 'serpentard':
+		color = 0x1A472A;
+		break;
+	case 'poufsouffle':
+		color = 0xFFF4B1;
+		break;
+	case 'serdaigle':
+		color = 0x0E1A40;
+		break;
+	default: 'griffondor'
+		color = 0x740001;
+		break;
+}
 
 let materialArray = [
 	new THREE.MeshBasicMaterial({
 		map: texture_rt, 
 		transparent: true,
-		color: 0x0080ff,
+		color: color,
 	}),
 	new THREE.MeshBasicMaterial({
 		map: texture_lf, 
 		transparent: true,
-		color: 0x0080ff,
+		color: color,
 	}),
 	new THREE.MeshBasicMaterial({
 		map: texture_up, 
 		transparent: true,
-		color: 0x0080ff,
+		color: color,
 	}),
 	new THREE.MeshBasicMaterial({
 		map: texture_dn, 
 		transparent: true,
-		color: 0x0080ff,
+		color: color,
 	}),
 	new THREE.MeshBasicMaterial({
 		map: texture_ft, 
 		transparent: true,
-		color: 0x0080ff,
+		color: color,
 	}),
 	new THREE.MeshBasicMaterial({
 		map: texture_bk, 
 		transparent: true,
-		color: 0x0080ff,
+		color: color,
 	})
 ];
 
